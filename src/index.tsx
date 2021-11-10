@@ -3,7 +3,9 @@ import LottiePlayer from "react-lottie-player";
 import { parseUnit } from "./parseUnit";
 import animationData from "./animationData.json";
 import type { AnimationSegment } from "lottie-web";
-import { css, cx } from "@emotion/css";
+import { setup, styled } from "goober";
+
+setup(React.createElement);
 
 // Allows accessing DarkModeToggleProps type via DarkModeToggle.Props
 export declare namespace DarkModeToggle {
@@ -25,32 +27,33 @@ export declare namespace DarkModeToggle {
   };
 }
 
-const buttonStyles = (sizeValue: number, sizeUnit: string): string =>
-  css({
-    cursor: "pointer",
-    overflow: "hidden",
-    width: `${sizeValue}${sizeUnit}`,
-    height: `${sizeValue * 0.5}${sizeUnit}`,
-    appearance: "none",
-    border: "none",
-    backgroundColor: "transparent",
-    padding: 0,
-  });
+const Button = styled("button")<{ sizeValue: number; sizeUnit: string }>`
+  cursor: pointer;
+  overflow: hidden;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  width: ${({ sizeValue, sizeUnit }) => `${sizeValue}${sizeUnit}`};
+  height: ${({ sizeValue, sizeUnit }) => `${sizeValue * 0.5}${sizeUnit}`};
+`;
 
-const lottieStyles = (
-  isLottieReady: boolean,
-  sizeValue: number,
-  sizeUnit: string
-): string =>
-  css({
-    display: isLottieReady ? "flex" : "none",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: `${sizeValue * -0.575}${sizeUnit}`,
-    marginLeft: `${sizeValue * -0.32}${sizeUnit}`,
-    width: `${sizeValue * 1.65}${sizeUnit}`,
-    height: `${sizeValue * 1.65}${sizeUnit}`,
-  });
+const StyledLottiePlayer = styled(LottiePlayer)<{
+  isLottieReady: boolean;
+  sizeValue: number;
+  sizeUnit: string;
+  animationData: object;
+}>`
+  display: ${({ isLottieReady }) => (isLottieReady ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
+  margin-top: ${({ sizeValue, sizeUnit }) =>
+    `${sizeValue * -0.575}${sizeUnit}`};
+  margin-left: ${({ sizeValue, sizeUnit }) =>
+    `${sizeValue * -0.32}${sizeUnit}`};
+  width: ${({ sizeValue, sizeUnit }) => `${sizeValue * 1.65}${sizeUnit}`};
+  height: ${({ sizeValue, sizeUnit }) => `${sizeValue * 1.65}${sizeUnit}`};
+`;
 
 const arePropsEqual = (
   prevProps: DarkModeToggle.Props,
@@ -71,25 +74,29 @@ export const DarkModeToggle = React.memo<DarkModeToggle.Props>(
     const segmentsToPlay: AnimationSegment = isDarkMode ? [2, 50] : [51, 96];
 
     return (
-      <button
+      <Button
         onClick={() => {
           if (!isReadyToAnimate) setReadyToAnimate(true);
           onChange(!isDarkMode);
         }}
+        sizeValue={sizeValue}
+        sizeUnit={sizeUnit}
         aria-hidden="true"
-        className={cx(buttonStyles(sizeValue, sizeUnit), className)}
+        className={className}
       >
-        <LottiePlayer
-          className={lottieStyles(isLottieReady, sizeValue, sizeUnit)}
+        <StyledLottiePlayer
+          isLottieReady={isLottieReady}
+          sizeValue={sizeValue}
+          sizeUnit={sizeUnit}
           play={isReadyToAnimate}
           speed={speed}
-          animationData={animationData}
           loop={false}
           segments={segmentsToPlay}
           goTo={segmentToGoTo}
+          animationData={animationData}
           onEnterFrame={() => setLottieReady(true)}
         />
-      </button>
+      </Button>
     );
   },
   arePropsEqual
