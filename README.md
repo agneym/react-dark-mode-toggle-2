@@ -1,4 +1,4 @@
-# react-dark-mode-toggle-2
+# @agney/react-dark-mode-toggle
 
 Rewrite of a cute dark mode toggle 🦉
 
@@ -6,8 +6,11 @@ Original library [react-dark-mode-toggle](https://github.com/cawfree/react-dark-
 [Alex Thoma](https://github.com/cawfree). Credit goes out to those who helped build that library to what it is today. 
 Let's see if we can take it even further.
 
-<a href="https://reactjs.org/">
-    <img alt="react" src="https://badges.aleen42.com/src/react.svg" >
+<a href="https://www.npmjs.com/package/@agney/react-dark-mode-toggle">
+    <img alt="latest release" src="https://img.shields.io/npm/v/@agney/react-dark-mode-toggle">
+</a>
+<a href="https://bundlephobia.com/package/@agney/react-dark-mode-toggle">
+    <img alt="latest release" src="https://img.shields.io/bundlephobia/minzip/@agney/react-dark-mode-toggle">
 </a>
 <a href="https://www.typescriptlang.org">
     <img alt="code language: typescript" src="https://badges.aleen42.com/src/typescript.svg">
@@ -18,14 +21,13 @@ Let's see if we can take it even further.
 <a href="https://github.com/prettier/prettier">
     <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square">
 </a>
-<a href="#">
-    <img alt="latest release" src="https://img.shields.io/npm/v/react-dark-mode-toggle-2?color=darkgreen&label=latest">
-</a>
 
 
 <p align="center">
   <img src="./assets/title.gif" width="300" height="300" />
 </p>
+
+- Switches out emotion for goober from the original repository.
 
 
 This rewrite:

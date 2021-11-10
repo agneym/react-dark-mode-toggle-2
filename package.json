@@ -41,7 +41,7 @@
     "prepublishOnly": "yarn build"
   },
   "repository": "",
-  "author": "Todd Elvers <todd.elvers+github@gmail.com>",
+  "author": "Agney Menon <agney@outlook.in>",
   "license": "MIT",
   "private": false,
   "resolutions": {
